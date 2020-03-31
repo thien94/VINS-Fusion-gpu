@@ -6,8 +6,8 @@ Panels:
       Expanded:
         - /Global Options1
         - /LoopGroup1/loop_match_Image1
-        - /VIOGroup1/CameraMarker1
         - /GlobalGroup1/CarModel1
+        - /TF1/Frames1
       Splitter Ratio: 0.4651159942150116
     Tree Height: 356
   - Class: rviz/Selection
@@ -62,12 +62,12 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: true
     - Class: rviz/Axes
-      Enabled: true
+      Enabled: false
       Length: 0.5
       Name: Axes
       Radius: 0.05000000074505806
       Reference Frame: map
-      Value: true
+      Value: false
     - Class: rviz/Group
       Displays:
         - Class: rviz/MarkerArray
@@ -213,7 +213,7 @@ Visualization Manager:
           Marker Topic: /vins_estimator/camera_pose_visual
           Name: CameraMarker
           Namespaces:
-            CameraPoseVisualization: true
+            {}
           Queue Size: 100
           Value: true
         - Alpha: 1
@@ -276,7 +276,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-      Enabled: true
+      Enabled: false
       Name: VIOGroup
     - Class: rviz/Group
       Displays:
@@ -311,7 +311,7 @@ Visualization Manager:
             {}
           Queue Size: 100
           Value: true
-      Enabled: true
+      Enabled: false
       Name: GlobalGroup
     - Class: rviz/Image
       Enabled: true
@@ -323,6 +323,157 @@ Visualization Manager:
       Normalize Range: true
       Queue Size: 2
       Transport Hint: raw
+      Unreliable: false
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        body:
+          Value: true
+        camera:
+          Value: false
+        first_camera_rect:
+          Value: false
+        map:
+          Value: true
+        second_camera_rect:
+          Value: false
+        t265_accel_frame:
+          Value: false
+        t265_accel_optical_frame:
+          Value: false
+        t265_fisheye1_frame:
+          Value: false
+        t265_fisheye1_optical_frame:
+          Value: false
+        t265_fisheye2_frame:
+          Value: false
+        t265_fisheye2_optical_frame:
+          Value: false
+        t265_gyro_frame:
+          Value: false
+        t265_imu_optical_frame:
+          Value: false
+        t265_link:
+          Value: false
+        t265_pose_frame:
+          Value: true
+        tag100:
+          Value: false
+        tag102:
+          Value: false
+        vicon/nuc/nuc:
+          Value: true
+        vicon/uwb100/uwb100:
+          Value: false
+        vicon/uwb102/uwb102:
+          Value: false
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        map:
+          body:
+            camera:
+              {}
+          t265_pose_frame:
+            t265_link:
+              t265_accel_frame:
+                t265_accel_optical_frame:
+                  {}
+              t265_fisheye1_frame:
+                t265_fisheye1_optical_frame:
+                  first_camera_rect:
+                    tag100:
+                      {}
+                    tag102:
+                      {}
+              t265_fisheye2_frame:
+                t265_fisheye2_optical_frame:
+                  second_camera_rect:
+                    {}
+              t265_gyro_frame:
+                t265_imu_optical_frame:
+                  {}
+          vicon/nuc/nuc:
+            {}
+          vicon/uwb100/uwb100:
+            {}
+          vicon/uwb102/uwb102:
+            {}
+      Update Interval: 0
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 0; 0; 255
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Billboards
+      Line Width: 0.029999999329447746
+      Name: Path_t265
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /t265/trajectory
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 255; 0; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Billboards
+      Line Width: 0.029999999329447746
+      Name: Path_vicon
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /vicon/trajectory
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 0; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Billboards
+      Line Width: 0.029999999329447746
+      Name: Path_uwbs
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /uwbs/trajectory
       Unreliable: false
       Value: true
   Enabled: true
@@ -351,25 +502,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 4.380377292633057
+      Distance: 5.8443803787231445
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.9678303003311157
-        Y: -0.3062956929206848
-        Z: 0.38144296407699585
+        X: -0.9300034046173096
+        Y: -0.28216904401779175
+        Z: 0.38144487142562866
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9197986125946045
+      Pitch: 0.8047987222671509
       Target Frame: world
       Value: ThirdPersonFollower (rviz)
-      Yaw: 3.140636444091797
+      Yaw: 3.1356348991394043
     Saved: ~
 Window Geometry:
   Displays:

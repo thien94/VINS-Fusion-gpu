@@ -1,13 +1,40 @@
 <?xml version="1.0"?>
 <launch>
-    <!-- <include file="$(find realsense2_camera)/launch/rs_t265.launch"/> -->
-    
-    <arg name="config_file" default="$(find vins)/../config/realsense_t265/t265.yaml" />
+  <!-- <include file="$(find realsense2_camera)/launch/rs_t265.launch"/> -->
 
-    <node name="vins_estimator" pkg="vins" type="vins_node" output="screen" >
-      <param name="config_file" value="$(arg config_file)" />
-    </node>
+  <arg name="config_file" default="$(find vins)/../config/realsense_t265/t265.yaml" />
 
-    <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find vins)/../config/vins_rviz_config.rviz" />
+  <node name="vins_estimator" pkg="vins" type="vins_node" output="screen" >
+    <param name="config_file" value="$(arg config_file)" />
+  </node>
 
+  <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find vins)/../config/vins_rviz_config.rviz" />
+
+  <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="trajectory_server_vicon" output="screen" ns="vicon" >
+      <param name="/target_frame_name" value="/map" />
+      <param name="/source_frame_name" value="/vicon/nuc/nuc" />
+      <param name="/trajectory_update_rate" value="20.0" />
+      <param name="/trajectory_publish_rate" value="20.0" />
+  </node>
+
+  <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="trajectory_server_leica" output="screen" ns="leica" >
+      <param name="/target_frame_name" value="/map" />
+      <param name="/source_frame_name" value="/leica_rel" />
+      <param name="/trajectory_update_rate" value="20.0" />
+      <param name="/trajectory_publish_rate" value="20.0" />
+  </node>
+
+  <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="trajectory_server_uwbs" output="screen" ns="uwbs" >
+      <param name="/target_frame_name" value="/map" />
+      <param name="/source_frame_name" value="/body" />
+      <param name="/trajectory_update_rate" value="20.0" />
+      <param name="/trajectory_publish_rate" value="20.0" />
+  </node>
+
+  <node pkg="hector_trajectory_server" type="hector_trajectory_server" name="trajectory_server_t265" output="screen" ns="t265" >
+      <param name="/target_frame_name" value="/map" />
+      <param name="/source_frame_name" value="/t265_pose_frame" />
+      <param name="/trajectory_update_rate" value="20.0" />
+      <param name="/trajectory_publish_rate" value="20.0" />
+  </node>
 </launch>
