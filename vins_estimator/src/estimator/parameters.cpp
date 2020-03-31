@@ -50,7 +50,7 @@ int MIN_DIST;
 double F_THRESHOLD;
 int SHOW_TRACK;
 int FLOW_BACK;
-
+int FISHEYE;
 
 template <typename T>
 T readParam(ros::NodeHandle &n, std::string name)
@@ -96,6 +96,10 @@ void readParameters(std::string config_file)
 
     USE_GPU = fsSettings["use_gpu"];
     USE_GPU_ACC_FLOW = fsSettings["use_gpu_acc_flow"];
+    if (USE_GPU)
+    {
+        ROS_INFO("Using gpu acceleration");
+    }
 
     USE_IMU = fsSettings["imu"];
     printf("USE_IMU: %d\n", USE_IMU);
@@ -215,5 +219,15 @@ void readParameters(std::string config_file)
 
     }
 
+    FISHEYE = fsSettings["fisheye"];
+    if (FISHEYE)
+    {
+        ROS_INFO("Using fisheye mask");
+    }
+    else
+    {
+        ROS_INFO("NOT USING FISHEYE MASK");
+    }
+    
     fsSettings.release();
 }

@@ -55,7 +55,19 @@ FeatureTracker::FeatureTracker()
 
 void FeatureTracker::setMask()
 {
-    mask = cv::Mat(row, col, CV_8UC1, cv::Scalar(255));
+    if (FISHEYE && fisheye_mask.empty())
+    {
+        fisheye_mask = cv::Mat::zeros(800, 848, CV_8UC1);
+        cv::circle(fisheye_mask, cv::Point2f(424, 400), 400, cv::Scalar(255), -1, 8, 0);
+        // printf("Using fisheye mask\n");
+        // cv::imshow("fisheye mask", fisheye_mask);
+        // cv::waitKey(0);
+    }
+
+    if (FISHEYE)
+        mask = fisheye_mask.clone();
+    else
+        mask = cv::Mat(row, col, CV_8UC1, cv::Scalar(255));
 
     // prefer to keep features that are tracked for long time
     vector<pair<int, pair<cv::Point2f, int>>> cnt_pts_id;

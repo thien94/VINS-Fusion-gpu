@@ -10,6 +10,7 @@
 #pragma once
 
 #include <ros/ros.h>
+#include <cv_bridge/cv_bridge.h>
 #include <std_msgs/Header.h>
 #include <std_msgs/Float32.h>
 #include <std_msgs/Bool.h>
@@ -61,3 +62,5 @@ void pubKeyframe(const Estimator &estimator);
 void pubRelocalization(const Estimator &estimator);
 
 void pubCar(const Estimator & estimator, const std_msgs::Header &header);
+
+void pubTrackImage(const cv::Mat &imgTrack, const double t);

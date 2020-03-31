@@ -64,6 +64,12 @@ void Estimator::inputImage(double t, const cv::Mat &_img, const cv::Mat &_img1)
     //     sum_t_feature += featureTrackerTime.toc();
     //     printf("featureTracker time: %f\n", sum_t_feature/(float)inputImageCnt);
     // }
+       
+    // if (SHOW_TRACK)
+    // {
+    //     cv::Mat imgTrack = featureTracker.getTrackImage();
+    //     pubTrackImage(imgTrack, t);
+    // }
     
     if(MULTIPLE_THREAD)  
     {     
@@ -208,7 +214,7 @@ void Estimator::processMeasurements()
             printStatistics(*this, 0);
 
             std_msgs::Header header;
-            header.frame_id = "world";
+            header.frame_id = "map";
             header.stamp = ros::Time(feature.first);
 
             pubOdometry(*this, header);
