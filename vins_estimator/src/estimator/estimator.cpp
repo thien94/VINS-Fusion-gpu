@@ -73,7 +73,7 @@ void Estimator::inputImage(double t, const cv::Mat &_img, const cv::Mat &_img1)
     
     if(MULTIPLE_THREAD)  
     {     
-        if(inputImageCnt % 2 == 0)
+        // if(inputImageCnt % 2 == 0) # Possibly to lower the computational cost
         {
             mBuf.lock();
             featureBuf.push(make_pair(t, featureFrame));
@@ -223,7 +223,7 @@ void Estimator::processMeasurements()
             pubPointCloud(*this, header);
             pubKeyframe(*this);
             pubTF(*this, header);
-            printf("process measurement time: %f\n", t_process.toc());
+            printf("process measurement time: %3.3f ms\n", t_process.toc());
         }
 
         if (! MULTIPLE_THREAD)
@@ -250,8 +250,11 @@ void Estimator::initFirstIMUPose(vector<pair<double, Eigen::Vector3d>> &accVecto
     printf("averge acc %f %f %f\n", averAcc.x(), averAcc.y(), averAcc.z());
     Matrix3d R0 = Utility::g2R(averAcc);
     double yaw = Utility::R2ypr(R0).x();
+    if (FISHEYE) // Temporary fix for Realsense T265's IMU orientation
+        yaw = -90;
     R0 = Utility::ypr2R(Eigen::Vector3d{-yaw, 0, 0}) * R0;
     Rs[0] = R0;
+    cout << "init yaw " << yaw << endl;
     cout << "init R0 " << endl << Rs[0] << endl;
     //Vs[0] = Vector3d(5, 0, 0);
 }

@@ -371,16 +371,13 @@ void pubTF(const Estimator &estimator, const std_msgs::Header &header)
     correct_t = estimator.Ps[WINDOW_SIZE];
     correct_q = estimator.Rs[WINDOW_SIZE];
 
-    transform.setOrigin(tf::Vector3(-correct_t(1),
-                                    correct_t(0),
+    transform.setOrigin(tf::Vector3(correct_t(0),
+                                    correct_t(1),
                                     correct_t(2)));
     q.setW(correct_q.w());
     q.setX(correct_q.x());
     q.setY(correct_q.y());
     q.setZ(correct_q.z());
-    static tf::Quaternion quat_rot_x = tf::createQuaternionFromRPY(-1.57079632679, 0, 0);
-    q = q * quat_rot_x;
-    q = q.normalize();
     transform.setRotation(q);
     br.sendTransform(tf::StampedTransform(transform, header.stamp, "map", "body"));
 

@@ -15,7 +15,7 @@ cam1_calib: "fisheye2.yaml"
 image_width: 848
 image_height: 800
 
-fisheye: 1
+fisheye: 1 # Set to one to apply fisheye mask onto input image
 
 # Extrinsic parameter between IMU and Camera.
 estimate_extrinsic: 0   # 0  Have an accurate extrinsic parameters. We will trust the following imu^R_cam, imu^T_cam, don't change it.
